@@ -8,7 +8,7 @@ import { Grid, Paper, CardHeader, TextField } from "@material-ui/core";
 
 const useStyles = makeStyles({
     root: {
-        minWidth: 275,
+
     },
     title: {
         fontSize: 14,
@@ -28,8 +28,9 @@ export default function Login() {
                 direction="column"
                 alignItems="center"
                 justify="center"
-                style={{ minHeight: '100vh' }}>
-                <Grid item xs={3}>
+                style={{ minHeight: '100vh' }}
+            >
+                <Grid item xs={12}>
                     <Paper elevation={3} >
                         <Card className={classes.root}>
                             <CardHeader
