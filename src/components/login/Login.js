@@ -80,7 +80,7 @@ export default function Login() {
             return false;
         }
         if (state.password === "") {
-            enqueueSnackbar("Password is mandatory", {
+            enqueueSnackbar("Enter password", {
                 variant: 'error',
             });
             return false;
