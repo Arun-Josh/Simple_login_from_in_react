@@ -17,19 +17,19 @@ const useStyles = makeStyles({
         // fontSize: 14,
         textAlign: "center"
     },
-    loginBtn : {
+    loginBtn: {
         background: "#8bc34a",
-        color:"white",
+        color: "white",
         '&:hover': {
             background: "#618833",
-         },
+        },
     },
-    registerBtn : {
+    registerBtn: {
         background: "#ff9800",
-        color:"white",
+        color: "white",
         '&:hover': {
             background: "#b26a00",
-         },
+        },
     }
 });
 
@@ -41,7 +41,8 @@ export default function Login() {
         email: "",
         password: "",
         registerRedirect: false,
-        homeRedirect: false
+        homeRedirect: false,
+        userid: "123",
     });
 
 
@@ -93,19 +94,19 @@ export default function Login() {
             let payload = {}
             payload.email = state.email;
             payload.password = state.password
-            Axios.post('/auth', payload)
+            Axios.post('/auth/', payload)
                 .then(res => {
                     console.log(res)
-                    if (res.data === "success"){
-                        setState(prevState => (
-                            {
-                                ...prevState, homeRedirect: true
-                            }
-                        ))
-                    }else{
+                    if (res.data === "no") {
                         enqueueSnackbar("username or password incorect", {
                             variant: 'error',
                         });
+                    } else {
+                        setState(prevState => (
+                            {
+                                ...prevState, userid: res.data._id, homeRedirect:true
+                            }
+                        ))
                     }
                 })
                 .catch(err => {
@@ -156,7 +157,7 @@ export default function Login() {
 
             {/* Redirects */}
             {state.registerRedirect ? <Redirect to={"/register"} /> : null};
-            {state.homeRedirect ? <Redirect to={"/home"} /> : null};
+            {state.homeRedirect ? <Redirect to={`/home/${state.userid}`} /> : null};
 
         </>
     );
