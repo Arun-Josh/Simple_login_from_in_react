@@ -8,7 +8,7 @@ router.route('/').get((req,res) => {
         })
 })
 
-router.route('/:id').get((req,res) => {
+router.route('/profile/:id').get((req,res) => {
     User.findById(req.params.id)
         .then(user => {
             res.json(user)

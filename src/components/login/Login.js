@@ -157,7 +157,7 @@ export default function Login() {
 
             {/* Redirects */}
             {state.registerRedirect ? <Redirect to={"/register"} /> : null};
-            {state.homeRedirect ? <Redirect to={`/home/${state.userid}`} /> : null};
+            {state.homeRedirect ? <Redirect to={`/home?id=${state.userid}`} /> : null};
 
         </>
     );

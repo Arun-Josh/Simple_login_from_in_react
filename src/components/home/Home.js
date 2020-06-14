@@ -15,19 +15,23 @@ const useStyles = makeStyles({
     }
 });
 
-export default function Home() {
+export default function Home(props) {
 
     const classes = useStyles();
 
     const [state, setState] = useState({
+        userid: new URLSearchParams(props.location.search).get("id"),
         userName: "Dragon",
         email: "dragon@dragoninc.com"
     });
 
     useEffect(()=>{
-        Axios.get('/profile/')
+        Axios.get(`/api/users/profile/${state.userid}`)
             .then(res =>{
-
+                setState(prevState => (
+                    {
+                        ...prevState, userName: res.data.userName, email: res.data.email
+                    }))
             })
             .catch(err=> console.log(err))
     },[])
