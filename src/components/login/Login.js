@@ -24,10 +24,10 @@ export default function Login() {
     const { enqueueSnackbar } = useSnackbar();
 
     const [state, setState] = useState({
-            email: "",
-            password: "",
-            registerRedirect : false,
-            homeRedirect : false
+        email: "",
+        password: "",
+        registerRedirect: false,
+        homeRedirect: false
     });
 
 
@@ -71,17 +71,22 @@ export default function Login() {
             });
             return false;
         }
-        return true;        
+        return true;
     }
 
     const handleLogin = () => {
-        if(validateInputs()){
+        if (validateInputs()) {
             let payload = {}
             payload.email = state.email;
             payload.password = state.password
             Axios.post('/auth', payload)
                 .then(res => {
-
+                    console.log(res)
+                    setState(prevState => (
+                        {
+                            ...prevState, homeRedirect: true
+                        }
+                    ))
                 })
                 .catch(err => {
                     enqueueSnackbar("Something went wrong :(", {
@@ -110,9 +115,9 @@ export default function Login() {
                             />
                             <CardContent>
                                 <form className={classes.root} noValidate autoComplete="off">
-                                    <TextField fullWidth={true} onChange={handleEmailChange} label="Email" variant="outlined"/>
-                                    <br/>
-                                    <br/>
+                                    <TextField fullWidth={true} onChange={handleEmailChange} label="Email" variant="outlined" />
+                                    <br />
+                                    <br />
                                     <TextField fullWidth={true} onChange={handlePassChange} label="Password" variant="outlined" />
                                 </form>
                             </CardContent>
@@ -120,7 +125,7 @@ export default function Login() {
                                 <Button variant="contained" color="secondary" onClick={handleLogin}>
                                     Login
                                 </Button>
-                                <Button variant="contained" color="primary" onClick={ () => { setState(prevState => ({ ...prevState, registerRedirect:true })) }}>
+                                <Button variant="contained" color="primary" onClick={() => { setState(prevState => ({ ...prevState, registerRedirect: true })) }}>
                                     Register
                                 </Button>
                             </CardActions>
@@ -131,7 +136,7 @@ export default function Login() {
 
             {/* Redirects */}
             {state.registerRedirect ? <Redirect to={"/register"} /> : null};
-            {state.homeRedirect     ? <Redirect to={"/home"} /> : null};
+            {state.homeRedirect ? <Redirect to={"/home"} /> : null};
 
         </>
     );
