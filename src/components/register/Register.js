@@ -34,41 +34,46 @@ export default function Register() {
             enqueueSnackbar("Password and confirm password doesn't match", {
                 variant: 'error',
             });
-            return;
+            return false;
         }
-    }        
+        return true;
+    }
 
     const validateInputs = () => {
         if (state.userName === "") {
             enqueueSnackbar("User name is mandatory", {
                 variant: 'error',
             });
-            return;
+            return false;
         }
         if (state.email === "") {
             enqueueSnackbar("User email is mandatory", {
                 variant: 'error',
             });
-            return;
+            return false;
         }
         if (state.userName === "") {
             enqueueSnackbar("Password is mandatory", {
                 variant: 'error',
             });
-            return;
+            return false;
         }
-        validatePassword();
+        return validatePassword();
     }
 
     const handleRegisteration = () => {
 
-        validateInputs();
-
-        Axios.post('/api/register')
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => console.log(err))
+        if (validateInputs) {
+            Axios.post('/api/register', state)
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(err => {
+                    enqueueSnackbar("Something went wrong :(", {
+                        variant: 'error',
+                    });
+                })
+        }
     }
 
     return (
