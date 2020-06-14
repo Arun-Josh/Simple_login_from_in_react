@@ -182,7 +182,7 @@ export default function Register() {
             </Grid>
 
             {/* Redirects */}
-            {state.loginRedirect ? <Redirect to={"/login"} /> : null};
+            {state.loginRedirect ? <Redirect to={"/"} /> : null};
 
         </>
     );
