@@ -22,40 +22,53 @@ export default function Register() {
     const classes = useStyles();
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-    const [state,setState] = useState({
-        userName : "",
-        email : "",
-        password : "",
-        confirmPass :""
+    const [state, setState] = useState({
+        userName: "",
+        email: "",
+        password: "",
+        confirmPass: ""
     });
 
+    const validatePassword = () => {
+        if (state.pass !== state.confirmPass) {
+            enqueueSnackbar("Password and confirm password doesn't match", {
+                variant: 'error',
+            });
+            return;
+        }
+    }        
+
     const validateInputs = () => {
-        if (state.userName===""){
-            enqueueSnackbar("User name is mandatory", { 
+        if (state.userName === "") {
+            enqueueSnackbar("User name is mandatory", {
                 variant: 'error',
             });
+            return;
         }
-        if (state.email===""){
-            enqueueSnackbar("User email is mandatory", { 
+        if (state.email === "") {
+            enqueueSnackbar("User email is mandatory", {
                 variant: 'error',
             });
+            return;
         }
-        if (state.userName===""){
-            enqueueSnackbar("Password is mandatory", { 
+        if (state.userName === "") {
+            enqueueSnackbar("Password is mandatory", {
                 variant: 'error',
             });
+            return;
         }
+        validatePassword();
     }
 
     const handleRegisteration = () => {
 
         validateInputs();
 
-        Axios.post('/api/register',)
-            .then(res=>{
+        Axios.post('/api/register')
+            .then(res => {
                 console.log(res)
             })
-            .catch(err=> console.log(err))
+            .catch(err => console.log(err))
     }
 
     return (
@@ -80,12 +93,12 @@ export default function Register() {
                                     <br />
                                     <TextField fullWidth={true} label="Email" variant="outlined" />
                                     <br />
-                                    <br/>
-                                    <TextField fullWidth={true} label="Password" variant="outlined" />
                                     <br />
-                                    <br/>
-                                    <TextField fullWidth={true} label="Confirm Password" variant="outlined" />
-                                    <br/>
+                                    <TextField fullWidth={true} type="password" label="Password" variant="outlined" />
+                                    <br />
+                                    <br />
+                                    <TextField fullWidth={true} type="password" label="Confirm Password" variant="outlined" />
+                                    <br />
                                 </form>
                             </CardContent>
                             <CardActions>
