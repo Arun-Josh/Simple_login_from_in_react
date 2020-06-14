@@ -82,11 +82,17 @@ export default function Login() {
             Axios.post('/auth', payload)
                 .then(res => {
                     console.log(res)
-                    setState(prevState => (
-                        {
-                            ...prevState, homeRedirect: true
-                        }
-                    ))
+                    if (res.data === "success"){
+                        setState(prevState => (
+                            {
+                                ...prevState, homeRedirect: true
+                            }
+                        ))
+                    }else{
+                        enqueueSnackbar("username or password incoorect", {
+                            variant: 'error',
+                        });
+                    }
                 })
                 .catch(err => {
                     enqueueSnackbar("Something went wrong :(", {
