@@ -16,6 +16,20 @@ const useStyles = makeStyles({
     title: {
         // fontSize: 14,
         textAlign: "center"
+    },
+    loginBtn : {
+        background: "#8bc34a",
+        color:"white",
+        '&:hover': {
+            background: "#618833",
+         },
+    },
+    registerBtn : {
+        background: "#ff9800",
+        color:"white",
+        '&:hover': {
+            background: "#b26a00",
+         },
     }
 });
 
@@ -128,10 +142,10 @@ export default function Login() {
                                 </form>
                             </CardContent>
                             <CardActions>
-                                <Button variant="contained" color="secondary" onClick={handleLogin}>
+                                <Button variant="contained" className={classes.loginBtn} onClick={handleLogin}>
                                     Login
                                 </Button>
-                                <Button variant="contained" color="primary" onClick={() => { setState(prevState => ({ ...prevState, registerRedirect: true })) }}>
+                                <Button variant="contained" className={classes.registerBtn} color="primary" onClick={() => { setState(prevState => ({ ...prevState, registerRedirect: true })) }}>
                                     Register
                                 </Button>
                             </CardActions>
