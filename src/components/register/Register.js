@@ -57,7 +57,7 @@ export default function Register() {
             });
             return false;
         }
-        if (validateEmail(state.email)) {
+        if (!validateEmail(state.email)) {
             enqueueSnackbar("Enter proper email", {
                 variant: 'error',
             });
