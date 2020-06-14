@@ -5,7 +5,9 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { Grid, Paper, CardHeader, TextField } from "@material-ui/core";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import Axios from "axios";
+import { useSnackbar } from 'notistack';
 
 const useStyles = makeStyles({
     root: {
@@ -19,10 +21,77 @@ const useStyles = makeStyles({
 
 export default function Login() {
     const classes = useStyles();
+    const { enqueueSnackbar } = useSnackbar();
+
     const [state, setState] = useState({
+            email: "",
+            password: "",
             registerRedirect : false,
             homeRedirect : false
     });
+
+
+    const handleEmailChange = (e) => {
+        const value = e.target.value;
+        setState(prevState => (
+            {
+                ...prevState, email: value
+            }))
+    }
+
+    const handlePassChange = (e) => {
+        const value = e.target.value;
+        setState(prevState => (
+            {
+                ...prevState, password: value
+            }))
+    }
+
+    const validateEmail = (email) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    const validateInputs = () => {
+        if (state.email === "") {
+            enqueueSnackbar("User email is mandatory", {
+                variant: 'error',
+            });
+            return false;
+        }
+        if (!validateEmail(state.email)) {
+            enqueueSnackbar("Enter proper email", {
+                variant: 'error',
+            });
+            return false;
+        }
+        if (state.password === "") {
+            enqueueSnackbar("Password is mandatory", {
+                variant: 'error',
+            });
+            return false;
+        }
+        return true;        
+    }
+
+    const handleLogin = () => {
+        if(validateInputs()){
+            let payload = {}
+            payload.email = state.email;
+            payload.password = state.password
+            Axios.post('/auth', payload)
+                .then(res => {
+
+                })
+                .catch(err => {
+                    enqueueSnackbar("Something went wrong :(", {
+                        variant: 'error',
+                    });
+                })
+        }
+
+    }
+
     return (
         <>
             <Grid container
@@ -41,14 +110,14 @@ export default function Login() {
                             />
                             <CardContent>
                                 <form className={classes.root} noValidate autoComplete="off">
-                                    <TextField id="outlined-basic" fullWidth={true} label="User name" variant="outlined"/>
+                                    <TextField fullWidth={true} onChange={handleEmailChange} label="Email" variant="outlined"/>
                                     <br/>
                                     <br/>
-                                    <TextField id="outlined-basic" fullWidth={true} label="Password" variant="outlined" />
+                                    <TextField fullWidth={true} onChange={handlePassChange} label="Password" variant="outlined" />
                                 </form>
                             </CardContent>
                             <CardActions>
-                                <Button variant="contained" color="secondary">
+                                <Button variant="contained" color="secondary" onClick={handleLogin}>
                                     Login
                                 </Button>
                                 <Button variant="contained" color="primary" onClick={ () => { setState(prevState => ({ ...prevState, registerRedirect:true })) }}>

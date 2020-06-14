@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import { Grid, Paper, CardHeader, TextField } from "@material-ui/core";
 import Axios from 'axios'
 import { useSnackbar } from 'notistack';
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
@@ -20,13 +21,14 @@ const useStyles = makeStyles({
 
 export default function Register() {
     const classes = useStyles();
-    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+    const { enqueueSnackbar } = useSnackbar();
 
     const [state, setState] = useState({
         userName: "",
         email: "",
         password: "",
-        confirmPass: ""
+        confirmPass: "",
+        loginRedirect: false
     });
 
     const validateEmail = (email) => {
@@ -76,32 +78,32 @@ export default function Register() {
         const value = e.target.value;
         setState(prevState => (
             {
-            ...prevState, userName : value
-        }))
+                ...prevState, userName: value
+            }))
     }
 
     const handleEmailChange = (e) => {
         const value = e.target.value;
         setState(prevState => (
             {
-            ...prevState, email : value
-        }))
+                ...prevState, email: value
+            }))
     }
 
     const handlePassChange = (e) => {
         const value = e.target.value;
         setState(prevState => (
             {
-            ...prevState, password : value
-        }))
+                ...prevState, password: value
+            }))
     }
 
     const handleConfirmPassChange = (e) => {
         const value = e.target.value;
         setState(prevState => (
             {
-            ...prevState, confirmPass : value
-        }))
+                ...prevState, confirmPass: value
+            }))
     }
 
     const handleRegisteration = () => {
@@ -109,6 +111,16 @@ export default function Register() {
             Axios.post('/api/register', state)
                 .then(res => {
                     console.log(res)
+                    if (res.data === "success") {
+                        enqueueSnackbar("Registered Successfully", {
+                            variant: 'success',
+                        });
+                        setState(prevState => (
+                            {
+                                ...prevState, loginRedirect: true
+                            }
+                        ))
+                    }
                 })
                 .catch(err => {
                     enqueueSnackbar("Something went wrong :(", {
@@ -161,6 +173,10 @@ export default function Register() {
                     </Paper>
                 </Grid>
             </Grid>
+
+            {/* Redirects */}
+            {state.loginRedirect ? <Redirect to={"/login"} /> : null};
+
         </>
     );
 } 
