@@ -1,26 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { Grid, Paper, CardHeader, TextField } from "@material-ui/core";
+import Axios from 'axios'
+import { useSnackbar } from 'notistack';
 
 const useStyles = makeStyles({
     root: {
-        minWidth: 275,
+
     },
     title: {
         fontSize: 14,
-        alignItems:"center"
-    },
-    pos: {
-        marginBottom: 12,
-    },
+        textAlign: "center"
+    }
 });
 
 export default function Register() {
     const classes = useStyles();
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+    const [state,setState] = useState({
+        userName : "",
+        email : "",
+        password : "",
+        confirmPass :""
+    });
+
+    const validateInputs = () => {
+        if (state.userName===""){
+            enqueueSnackbar("User name is mandatory", { 
+                variant: 'error',
+            });
+        }
+        if (state.email===""){
+            enqueueSnackbar("User email is mandatory", { 
+                variant: 'error',
+            });
+        }
+        if (state.userName===""){
+            enqueueSnackbar("Password is mandatory", { 
+                variant: 'error',
+            });
+        }
+    }
+
+    const handleRegisteration = () => {
+
+        validateInputs();
+
+        Axios.post('/api/register',)
+            .then(res=>{
+                console.log(res)
+            })
+            .catch(err=> console.log(err))
+    }
+
     return (
         <>
             <Grid container
@@ -29,7 +66,7 @@ export default function Register() {
                 alignItems="center"
                 justify="center"
                 style={{ minHeight: '100vh' }}>
-                <Grid item xs={3}>
+                <Grid item xs={12}>
                     <Paper elevation={3} >
                         <Card className={classes.root}>
                             <CardHeader
@@ -38,21 +75,27 @@ export default function Register() {
                             />
                             <CardContent>
                                 <form className={classes.root} noValidate autoComplete="off">
-                                    <TextField fullWidth={true} label="User name" variant="outlined"/>
-                                    <br/>
+                                    <TextField fullWidth={true} label="User name" variant="outlined" />
+                                    <br />
+                                    <br />
+                                    <TextField fullWidth={true} label="Email" variant="outlined" />
+                                    <br />
                                     <br/>
                                     <TextField fullWidth={true} label="Password" variant="outlined" />
+                                    <br />
                                     <br/>
                                     <TextField fullWidth={true} label="Confirm Password" variant="outlined" />
+                                    <br/>
                                 </form>
                             </CardContent>
                             <CardActions>
-                                <Button variant="contained" color="secondary">
-                                    Login
-                                </Button>
-                                <Button variant="contained" color="secondary">
-                                    Register
-                                </Button>
+                                <Grid>
+                                    <Grid item xs={12}>
+                                        <Button variant="contained" color="primary" onClick={handleRegisteration}>
+                                            Register
+                                        </Button>
+                                    </Grid>
+                                </Grid>
                             </CardActions>
                         </Card>
                     </Paper>
