@@ -115,7 +115,7 @@ export default function Register() {
 
     const handleRegisteration = () => {
         if (validateInputs()) {
-            Axios.post('/api/register', state)
+            Axios.post('/api/users/add', state)
                 .then(res => {
                     console.log(res)
                     if (res.data === "success") {
@@ -127,6 +127,11 @@ export default function Register() {
                                 ...prevState, loginRedirect: true
                             }
                         ))
+                    }
+                    else if (res.data==="duplicate"){
+                        enqueueSnackbar("Email already registered", {
+                            variant: 'error',
+                        });
                     }
                 })
                 .catch(err => {

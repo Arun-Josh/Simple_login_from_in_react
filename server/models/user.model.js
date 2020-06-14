@@ -8,4 +8,4 @@ const userSchema = new Schema({
     pass: { type: String , maxlength: 255}
 })
 
-module.exports = mongoose.model('User', userSchema, 'USERS')
+module.exports = mongoose.model('User', userSchema, 'DUMMYUSERS')

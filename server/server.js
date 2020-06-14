@@ -30,7 +30,7 @@ connection.once('open', () => {
 const loginRouter = require('./routes/Login.js');
 const userRouter = require('./routes/User.js');
 
-app.use('/auth', loginRouter);
+app.use('/auth/', loginRouter);
 app.use('/api/users/', userRouter)
 
 app.listen(PORT, () => {
