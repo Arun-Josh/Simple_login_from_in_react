@@ -11,8 +11,8 @@ Steps to run this project:
   3. Run npm i
   4. Open another terminal
   5. Go to /server
-  6. Run nodemon server.js
-  7. Ceate a file named .env inside /server and paste your MONGODB connection URI as ATLAS_URL='<CONNECTION URL HERE>'
+  6. Ceate a file named .env inside /server and paste your MONGODB connection URI as ATLAS_URL='<CONNECTION URL HERE>'
+  7. Run nodemon server.js 
 
 ![Screenshot from 2020-06-14 18-05-29](https://user-images.githubusercontent.com/24733451/84593482-188ece80-ae6a-11ea-8c01-3eea66a30fd3.png)
 ![Screenshot from 2020-06-14 18-08-00](https://user-images.githubusercontent.com/24733451/84593462-10cf2a00-ae6a-11ea-9160-437bae54f740.png)
