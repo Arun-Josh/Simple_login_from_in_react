@@ -138,7 +138,7 @@ export default function Login() {
                                     <TextField fullWidth={true} onChange={handleEmailChange} label="Email" variant="outlined" />
                                     <br />
                                     <br />
-                                    <TextField fullWidth={true} onChange={handlePassChange} label="Password" variant="outlined" />
+                                    <TextField fullWidth={true} type="password" onChange={handlePassChange} label="Password" variant="outlined" />
                                 </form>
                             </CardContent>
                             <CardActions>

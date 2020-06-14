@@ -16,6 +16,13 @@ const useStyles = makeStyles({
     title: {
         fontSize: 14,
         textAlign: "center"
+    },
+    registerBtn : {
+        background: "#ff9800",
+        color:"white",
+        '&:hover': {
+            background: "#b26a00",
+         },
     }
 });
 
@@ -163,7 +170,7 @@ export default function Register() {
                             <CardActions>
                                 <Grid>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" color="primary" onClick={handleRegisteration}>
+                                        <Button variant="contained" className={classes.registerBtn} onClick={handleRegisteration}>
                                             Register
                                         </Button>
                                     </Grid>
