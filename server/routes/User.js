@@ -13,6 +13,7 @@ router.route('/profile/:id').get((req,res) => {
         .then(user => {
             res.json(user)
         })
+        .catch(err => { res.status(400).json({ message: "" + err }) });
 })
 
 router.route('/add').post((req,res)=>{
