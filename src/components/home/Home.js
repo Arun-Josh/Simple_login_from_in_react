@@ -4,6 +4,8 @@ import CardContent from '@material-ui/core/CardContent';
 import { Grid, Paper, CardHeader, TextField } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
+// import useWindowSize from 'react-use/lib/useWindowSize'
+import Confetti from 'react-confetti'
 
 const useStyles = makeStyles({
     root: {
@@ -18,6 +20,7 @@ const useStyles = makeStyles({
 export default function Home(props) {
 
     const classes = useStyles();
+    // const { width, height } = useWindowSize()
 
     const [state, setState] = useState({
         userid: new URLSearchParams(props.location.search).get("id"),
@@ -37,7 +40,8 @@ export default function Home(props) {
     },[])
 
     return (
-        <>
+        <>  
+            {state.userName!==""? <Confetti/>:null}
             <Grid container
                 spacing={0}
                 direction="column"
