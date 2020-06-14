@@ -5,7 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { Grid, Paper, CardHeader, TextField } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 import Axios from "axios";
 import { useSnackbar } from 'notistack';
 
@@ -42,7 +42,7 @@ export default function Login(props) {
         password: "",
         registerRedirect: false,
         homeRedirect: false,
-        userid: "123",
+        userid: "",
     });
 
 
@@ -146,9 +146,11 @@ export default function Login(props) {
                                 <Button variant="contained" className={classes.loginBtn} onClick={handleLogin}>
                                     Login
                                 </Button>
+                                <NavLink to="register">
                                 <Button variant="contained" className={classes.registerBtn} color="primary" onClick={() => { setState(prevState => ({ ...prevState, registerRedirect: true })) }}>
                                     Register
                                 </Button>
+                                </NavLink>
                             </CardActions>
                         </Card>
                     </Paper>
@@ -156,9 +158,7 @@ export default function Login(props) {
             </Grid>
 
             {/* Redirects */}
-            {state.registerRedirect ? <Redirect to={"/register"} /> : null};
             {state.homeRedirect ? <Redirect to={`/home?id=${state.userid}`} /> : null};
-
         </>
     );
 } 
