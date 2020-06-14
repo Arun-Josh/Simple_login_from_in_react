@@ -29,6 +29,11 @@ export default function Register() {
         confirmPass: ""
     });
 
+    const validateEmail = (email) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
     const validatePassword = () => {
         if (state.pass !== state.confirmPass) {
             enqueueSnackbar("Password and confirm password doesn't match", {
@@ -52,6 +57,12 @@ export default function Register() {
             });
             return false;
         }
+        if (validateEmail(state.email)) {
+            enqueueSnackbar("Enter proper email", {
+                variant: 'error',
+            });
+            return false;
+        }
         if (state.userName === "") {
             enqueueSnackbar("Password is mandatory", {
                 variant: 'error',
@@ -63,7 +74,7 @@ export default function Register() {
 
     const handleRegisteration = () => {
 
-        if (validateInputs) {
+        if (validateInputs()) {
             Axios.post('/api/register', state)
                 .then(res => {
                     console.log(res)
