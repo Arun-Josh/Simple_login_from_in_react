@@ -1,13 +1,16 @@
-A Responsive Login page build in React.js with Material UI React
+**A Responsive Login page build in React.js with Material UI React**
 
-Prerequisites:
+**Project STACK: MERN**
+MongoDB Express.js React.js Node.js
+
+**Prerequisites:**
 1. Node ( Visit: https://nodejs.org/en/download/ to download node )
 2. Nodemon package
 3. MongoDB
 
-Steps to run this project:
+**Steps to run this project:**
   1. Clone or download this project
-  2. Go to project folder (Simple_login_from_in_react)
+  2. Go to project folder ( /Simple_login_from_in_react)
   3. Run npm i
   4. Open another terminal
   5. Go to /server
