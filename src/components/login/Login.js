@@ -89,7 +89,7 @@ export default function Login() {
                             }
                         ))
                     }else{
-                        enqueueSnackbar("username or password incoorect", {
+                        enqueueSnackbar("username or password incorect", {
                             variant: 'error',
                         });
                     }
