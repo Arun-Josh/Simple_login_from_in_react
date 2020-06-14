@@ -9,6 +9,7 @@ import Login from './components/login/Login';
 import Register from './components/register/Register';
 import background from './imgs/4.jpg';
 import { makeStyles } from '@material-ui/core';
+import Home from './components/home/Home';
 
 const useStyles = makeStyles({
   background: {
@@ -27,6 +28,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Login} />
           <Route path="/register" exact component={Register} />
+          <Route path="/home" exact component={Home} />
         </Switch>
       </Router>
     </div>
