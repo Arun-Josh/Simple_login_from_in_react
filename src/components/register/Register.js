@@ -35,7 +35,7 @@ export default function Register() {
     }
 
     const validatePassword = () => {
-        if (state.pass !== state.confirmPass) {
+        if (state.password !== state.confirmPass) {
             enqueueSnackbar("Password and confirm password doesn't match", {
                 variant: 'error',
             });
@@ -63,7 +63,7 @@ export default function Register() {
             });
             return false;
         }
-        if (state.userName === "") {
+        if (state.password === "") {
             enqueueSnackbar("Password is mandatory", {
                 variant: 'error',
             });
@@ -72,8 +72,39 @@ export default function Register() {
         return validatePassword();
     }
 
-    const handleRegisteration = () => {
+    const handleNameChange = (e) => {
+        const value = e.target.value;
+        setState(prevState => (
+            {
+            ...prevState, userName : value
+        }))
+    }
 
+    const handleEmailChange = (e) => {
+        const value = e.target.value;
+        setState(prevState => (
+            {
+            ...prevState, email : value
+        }))
+    }
+
+    const handlePassChange = (e) => {
+        const value = e.target.value;
+        setState(prevState => (
+            {
+            ...prevState, password : value
+        }))
+    }
+
+    const handleConfirmPassChange = (e) => {
+        const value = e.target.value;
+        setState(prevState => (
+            {
+            ...prevState, confirmPass : value
+        }))
+    }
+
+    const handleRegisteration = () => {
         if (validateInputs()) {
             Axios.post('/api/register', state)
                 .then(res => {
@@ -104,16 +135,16 @@ export default function Register() {
                             />
                             <CardContent>
                                 <form className={classes.root} noValidate autoComplete="off">
-                                    <TextField fullWidth={true} label="User name" variant="outlined" />
+                                    <TextField fullWidth={true} label="User name" onChange={handleNameChange} variant="outlined" />
                                     <br />
                                     <br />
-                                    <TextField fullWidth={true} label="Email" variant="outlined" />
+                                    <TextField fullWidth={true} label="Email" onChange={handleEmailChange} variant="outlined" />
                                     <br />
                                     <br />
-                                    <TextField fullWidth={true} type="password" label="Password" variant="outlined" />
+                                    <TextField fullWidth={true} type="password" onChange={handlePassChange} label="Password" variant="outlined" />
                                     <br />
                                     <br />
-                                    <TextField fullWidth={true} type="password" label="Confirm Password" variant="outlined" />
+                                    <TextField fullWidth={true} type="password" onChange={handleConfirmPassChange} label="Confirm Password" variant="outlined" />
                                     <br />
                                 </form>
                             </CardContent>
