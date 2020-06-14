@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function Register() {
+export default function Register(props) {
     const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
 

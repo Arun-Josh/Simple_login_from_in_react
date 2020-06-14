@@ -33,7 +33,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function Login() {
+export default function Login(props) {
     const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
 

@@ -21,8 +21,8 @@ export default function Home(props) {
 
     const [state, setState] = useState({
         userid: new URLSearchParams(props.location.search).get("id"),
-        userName: "Dragon",
-        email: "dragon@dragoninc.com"
+        userName: "",
+        email: ""
     });
 
     useEffect(()=>{
