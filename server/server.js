@@ -27,11 +27,9 @@ connection.once('open', () => {
 });
 
 //Routes
-const loginRouter = require('./routes/Login.js');
-const registrationRouter = require('./routes/Registration.js')
+const userRouter = require('./routes/User.js');
 
-app.use('/auth', loginRouter);
-app.use('/api/register', registrationRouter);
+app.use('/api/users/', userRouter)
 
 app.listen(PORT, () => {
     console.log(`Service is running on Port: ${PORT}`)

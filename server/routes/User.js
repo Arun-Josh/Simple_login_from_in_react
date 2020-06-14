@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const User = require('../models/user.model.js');
 
 router.route('/').get((req,res) => {
     User.find()
@@ -7,7 +6,6 @@ router.route('/').get((req,res) => {
             res.json(users)
         })
 })
-
 router.route('/add').post((req,res)=>{
     const userData = req.body;
     User.countDocuments({'email': userData.email })
