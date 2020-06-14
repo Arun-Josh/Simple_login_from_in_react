@@ -1,11 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
+require('dotenv').config();
 
 const PORT = process.env.PORT || 5050;
 
 //Deployment task
 app.use(express.json());
+
 
 const uri = process.env.ATLAS_URI
 
@@ -16,13 +18,13 @@ const options = {
     useUnifiedTopology: true
 }
 
-// mongoose.connect(uri, options);
+mongoose.connect(uri, options);
 
-// const connection = mongoose.connection;
-// connection.on('error', console.error.bind(console, 'connection error:'));
-// connection.once('open', () => {
-//     console.log('MongoDB Connection established successfully !')
-// });
+const connection = mongoose.connection;
+connection.on('error', console.error.bind(console, 'connection error:'));
+connection.once('open', () => {
+    console.log('MongoDB Connection established successfully !')
+});
 
 //Routes
 const loginRouter = require('./routes/Login.js');
