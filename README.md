@@ -1,4 +1,4 @@
-**A Responsive Login page build in React.js with Material UI React**
+# A Responsive Login page build in React.js with Material UI React
 
 **Project STACK: MERN**
 MongoDB Express.js React.js Node.js
@@ -14,10 +14,10 @@ MongoDB Express.js React.js Node.js
   3. Run npm i
   4. Open another terminal
   5. Go to /server
-  6. Ceate a file named .env inside /server and paste your MONGODB connection URI as ATLAS_URL='\<CONNECTION URI HERE\>'
+  6. Ceate a file named .env inside /server and paste your MongoDB connection URI as ATLAS_URL='\<CONNECTION URI HERE\>'
   **Eg:** 
-  File : .env
-  ATLAS_URI='mongodb+srv://user:c6tVW83745@cluster0-3alzu.mongodb.net/database?retryWrites=true&w=majority'
+  **File :** .env
+  ATLAS_URI='mongodb+srv://user:c6tVW83745817@cluster0-3a131.mongodb.net/database?retryWrites=true&w=majority'
   7. Run nodemon server.js 
 
 ![Screenshot from 2020-06-14 18-05-29](https://user-images.githubusercontent.com/24733451/84593482-188ece80-ae6a-11ea-8c01-3eea66a30fd3.png)
