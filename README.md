@@ -15,6 +15,7 @@ MongoDB Express.js React.js Node.js
   4. Open another terminal
   5. Go to project/server folder
   6. Ceate a file named .env inside project/server folderand paste your MongoDB connection URI as ATLAS_URL='\<CONNECTION URI HERE\>'
+  
   **Eg:** 
   **File :** .env
   ATLAS_URI='mongodb+srv://user:c6tVW83745817@cluster0-3a131.mongodb.net/database?retryWrites=true&w=majority'
